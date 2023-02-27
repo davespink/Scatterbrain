@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Scatterbrain</string>
     <string name="textview">TextView</string>
-    <string name="first_name">First Name</string>
+
     <string name="Result">Result</string>
-    <string name="barcode">Barcode</string>
-    <string name="upda">UP</string>
+
     <string name="listLine">listLine</string>
-    <string name="barcodeResult">barcode</string>
+
+    <string name="stop">STOP</string>
+    <string name="go">GO</string>
+    <string name="_5">5</string>
+    <string name="_10">10</string>
+    <string name="_30">30</string>
+    <string name="_60">60</string>
+    <string name="hello_i_am_a_textview">Hello, I am a TextView</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.example.scatterbrain;
 
 import android.content.Context;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //get the persons information
+        //get the alarm information
         int id =  getItem(position).getId();
         long start =  getItem(position).getStart();
         long stop = getItem(position).getStop();
@@ -80,6 +81,11 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
             result = convertView;
 
             convertView.setTag(holder);
+if(id==1){
+
+    convertView.setBackgroundColor(Color.GREEN);
+}
+
 
         } else {
             holder = (ViewHolder) convertView.getTag();

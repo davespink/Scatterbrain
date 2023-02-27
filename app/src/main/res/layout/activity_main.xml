@@ -2,21 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    <TextView android:id="@+id/text"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello, I am a TextView" />
-    <Button android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello, I am a Button" />
+        android:text="@string/hello_i_am_a_textview" />
+
+
+
 
     <ListView
         android:id="@+id/alarmList"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="200dp"
+        android:layout_height="427dp"
+        android:layout_marginTop="0dp"
 
         android:background="#2196F3" />
 

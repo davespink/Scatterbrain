@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:orientation="horizontal"
+    android:background="#FFC107"
     android:textAppearance="@style/TextAppearance.AppCompat.Large"
     android:weightSum="100">
 
@@ -39,6 +40,7 @@
         android:layout_height="80dp"
         android:layout_weight="75"
         android:text="TextView_description"
+
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
