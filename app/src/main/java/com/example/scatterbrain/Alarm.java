@@ -4,33 +4,42 @@ package com.example.scatterbrain;
  */
 
 public class Alarm {
-    private String my_id;
-    private String barcode;
+    private int id;
+    private long start;
+    private long stop;
     private String description;
-    private String qty;
 
-    public Alarm(String my_id, String barcode,  String description, String qty) {
-        this.my_id = my_id;
-        this.barcode = barcode;
+    public Alarm(int id, long start,long stop,  String description) {
+        this.id = id;
+        this.start = start;
+        this.stop = stop;
         this.description = description;
-        this.qty = qty;
     }
 
-    public String getMy_id() {
-        return my_id;
+    public int getId() {
+        return id;
     }
 
-    public void setMy_id(String my_id) {
-        this.my_id = my_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getBarcode() {
-        return barcode;
+    public long getStart() {
+        return start;
     }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    public void setStart(long start) {
+        this.start = start;
     }
+
+    public long getStop() {
+        return stop;
+    }
+
+    public void setStop(long stop) {
+        this.stop = stop;
+    }
+
 
     public String getDescription() {
         return description;
@@ -41,11 +50,4 @@ public class Alarm {
     }
 
 
-    public String getQty() {
-        return qty;
-    }
-
-    public void setQty(String qty) {
-        this.qty = qty;
-    }
 }

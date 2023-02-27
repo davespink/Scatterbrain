@@ -30,10 +30,10 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
      */
     private static class ViewHolder {
 
-        TextView my_id;
-        TextView barcode;
+        TextView id;
+        TextView start;
+        TextView stop;
         TextView description;
-        TextView qty;
     }
 
     /**
@@ -53,13 +53,13 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the persons information
-        String my_id = getItem(position).getMy_id();
-        String barcode = getItem(position).getBarcode();
+        int id =  getItem(position).getId();
+        long start =  getItem(position).getStart();
+        long stop = getItem(position).getStop();
         String description = getItem(position).getDescription();
-        String qty = getItem(position).getQty();
 
-        //Create the person object with the information
-        Alarm alarm = new Alarm(my_id, barcode, description, qty);
+        //Create the alarm object with the information
+        Alarm alarm = new Alarm(id, start,stop, description);
 
         //create the view result for showing the animation
         final View result;
@@ -67,37 +67,36 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         //ViewHolder object
         ViewHolder holder;
 
-
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new ViewHolder();
 
-            holder.my_id = convertView.findViewById(R.id.textView_my_id);
-            holder.barcode = convertView.findViewById(R.id.textView_barcode);
+            holder.id = convertView.findViewById(R.id.textView_id);
+            holder.start = convertView.findViewById(R.id.textView_start);
+            holder.stop = convertView.findViewById(R.id.textView_stop);
             holder.description = convertView.findViewById(R.id.textView_description);
-            holder.qty = convertView.findViewById(R.id.textView_qty);
 
             result = convertView;
 
             convertView.setTag(holder);
-
 
         } else {
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
 
-
         Animation animation = AnimationUtils.loadAnimation(mContext,
                 (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
         result.startAnimation(animation);
         lastPosition = position;
 
-        holder.my_id.setText(alarm.getMy_id());
-        holder.barcode.setText(alarm.getBarcode());
+        holder.id.setText(Integer.toString(alarm.getId()));
+
+        String s = Long.toString(alarm.getStart());
+        holder.start.setText(Long.toString(alarm.getStart()));
+        holder.stop.setText(Long.toString(alarm.getStop()));
         holder.description.setText(alarm.getDescription());
-        holder.qty.setText(alarm.getQty());
 
         return convertView;
     }

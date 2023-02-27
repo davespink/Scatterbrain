@@ -2,44 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:textAppearance="@style/TextAppearance.AppCompat.Large"
     android:orientation="horizontal"
+    android:textAppearance="@style/TextAppearance.AppCompat.Large"
     android:weightSum="100">
 
 
     <TextView
-        android:id="@+id/textView_my_id"
-        android:layout_width="50dp"
+        android:id="@+id/textView_id"
+        android:layout_width="5dp"
         android:layout_height="30dp"
         android:layout_weight="25"
-        android:visibility="gone"
         android:text="TextView_Id"
-
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/textView_barcode"
-        android:layout_width="150dp"
+        android:id="@+id/textView_start"
+        android:layout_width="50dp"
         android:layout_height="30dp"
-        android:layout_weight="25"
-        android:text="TextView_barcode"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textAlignment="viewStart" />
+        android:layout_weight="5"
+        android:text="TextView_start"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/textView_stop"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_weight="5"
+        android:text="TextView_stop"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/textView_description"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_weight="25"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="TextView_description" />
-
-    <TextView
-        android:id="@+id/textView_qty"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:layout_weight="25"
-        android:text="TextView_qty" />
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_weight="75"
+        android:text="TextView_description"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
 </LinearLayout>

@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     AlarmListAdapter adapter;
 
 
-
     //
     // see https://guides.codepath.com/android/Populating-a-ListView-with-a-CursorAdapter
     //
@@ -42,71 +41,26 @@ public class MainActivity extends AppCompatActivity {
 
         mListView.setOnItemClickListener((adapterView, view, position, l) -> {
 
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, String.format("Hello - %d",l) , Toast.LENGTH_SHORT).show();
 
         });
 
+        String stime = String.valueOf(System.currentTimeMillis());
 
-        Alarm s = new Alarm("1", "1", "one", "1");
+
+        Alarm s = new Alarm(1, 5, 10, "Free Sheba");
         alarmList.add(s);
 
 
-        s = new Alarm("2", "2", "two", "2");
-        alarmList.add(s);
-
-        s = new Alarm("3", "3", "three", "3");
-        alarmList.add(s);
-
-        s = new Alarm("4", "4", "four", "4");
-        alarmList.add(s);
-       s = new Alarm("1", "1", "one", "1");
-        alarmList.add(s);
-
-
-        s = new Alarm("2", "2", "two", "2");
-        alarmList.add(s);
-
-        s = new Alarm("3", "3", "three", "3");
-        alarmList.add(s);
-
-        s = new Alarm("4", "4", "four", "4");
-        alarmList.add(s);
-
-  s = new Alarm("1", "1", "one", "1");
-        alarmList.add(s);
-
-
-        s = new Alarm("2", "2", "two", "2");
-        alarmList.add(s);
-
-        s = new Alarm("3", "3", "three", "3");
-        alarmList.add(s);
-
-        s = new Alarm("4", "4", "four", "4");
-        alarmList.add(s);
-
-         s = new Alarm("1", "1", "one", "1");
-        alarmList.add(s);
-
-
-        s = new Alarm("2", "2", "two", "2");
-        alarmList.add(s);
-
-        s = new Alarm("3", "3", "three", "3");
-        alarmList.add(s);
-
-        s = new Alarm("4", "4", "four", "4");
+        s = new Alarm(2, 5, 10, "Off the boiler");
         alarmList.add(s);
 
     }
 
     public void refreshDataset() {
-     //   helper.readAll(this, alarmList);
+        //   helper.readAll(this, alarmList);
         adapter.notifyDataSetChanged();
     }
-
-
-
 
 
 }
