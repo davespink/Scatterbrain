@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 /**
@@ -22,8 +23,8 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
     //private static final String TAG = "PersonListAdapter";
 
-    private Context mContext;
-    private int mResource;
+    private final Context mContext;
+    private final int mResource;
     private int lastPosition = -1;
 
     /**
@@ -32,17 +33,16 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
     private static class ViewHolder {
 
         TextView id;
-        TextView start;
-        TextView stop;
+      //  TextView start;
+
         TextView description;
+
+        TextView countdown;
     }
 
     /**
      * Default constructor for the StockListAdapter
      *
-     * @param context
-     * @param resource
-     * @param objects
      */
     public AlarmListAdapter(Context context, int resource, ArrayList<Alarm> objects) {
         super(context, resource, objects);
@@ -54,13 +54,14 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the alarm information
-        int id =  getItem(position).getId();
-        long start =  getItem(position).getStart();
+        int id = getItem(position).getId();
+        long start = getItem(position).getStart();
         long stop = getItem(position).getStop();
         String description = getItem(position).getDescription();
+     //   long countdown = stop - start;
 
         //Create the alarm object with the information
-        Alarm alarm = new Alarm(id, start,stop, description);
+        Alarm alarm = new Alarm(id, start, stop, description);
 
         //create the view result for showing the animation
         final View result;
@@ -74,18 +75,15 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
             holder = new ViewHolder();
 
             holder.id = convertView.findViewById(R.id.textView_id);
-            holder.start = convertView.findViewById(R.id.textView_start);
-            holder.stop = convertView.findViewById(R.id.textView_stop);
             holder.description = convertView.findViewById(R.id.textView_description);
+            holder.countdown = convertView.findViewById(R.id.textView_countdown);
 
             result = convertView;
 
             convertView.setTag(holder);
-if(id==1){
-
-    convertView.setBackgroundColor(Color.GREEN);
-}
-
+            if (id == 1) {
+                convertView.setBackgroundColor(Color.GREEN);
+            }
 
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -97,13 +95,9 @@ if(id==1){
         result.startAnimation(animation);
         lastPosition = position;
 
-        holder.id.setText(Integer.toString(alarm.getId()));
-
-        String s = Long.toString(alarm.getStart());
-        holder.start.setText(Long.toString(alarm.getStart()));
-        holder.stop.setText(Long.toString(alarm.getStop()));
+        holder.id.setText(String.format(Locale.ENGLISH,"%d",alarm.getId()));
         holder.description.setText(alarm.getDescription());
-
+        holder.countdown.setText(String.format(Locale.ENGLISH,"%d",(alarm.getStop() - alarm.getStart())));
         return convertView;
     }
 }

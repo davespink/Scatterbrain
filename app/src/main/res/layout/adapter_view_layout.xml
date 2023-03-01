@@ -10,27 +10,10 @@
 
     <TextView
         android:id="@+id/textView_id"
-        android:layout_width="5dp"
-        android:layout_height="30dp"
-        android:layout_weight="25"
-        android:text="TextView_Id"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/textView_start"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_weight="5"
-        android:text="TextView_start"
-        android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    <TextView
-        android:id="@+id/textView_stop"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_weight="5"
-        android:text="TextView_stop"
+        android:text="TextView_id"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -44,5 +27,12 @@
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-
+    <TextView
+        android:id="@+id/textView_countdown"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_weight="5"
+        android:text="TextView_countdown"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 </LinearLayout>
