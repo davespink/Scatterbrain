@@ -33,7 +33,7 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
     private static class ViewHolder {
 
         TextView id;
-      //  TextView start;
+        //  TextView start;
 
         TextView description;
 
@@ -42,7 +42,6 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
     /**
      * Default constructor for the StockListAdapter
-     *
      */
     public AlarmListAdapter(Context context, int resource, ArrayList<Alarm> objects) {
         super(context, resource, objects);
@@ -54,11 +53,12 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the alarm information
-        int id = getItem(position).getId();
+        long id = getItem(position).getId();
         long start = getItem(position).getStart();
         long stop = getItem(position).getStop();
+
         String description = getItem(position).getDescription();
-     //   long countdown = stop - start;
+        //   long countdown = stop - start;
 
         //Create the alarm object with the information
         Alarm alarm = new Alarm(id, start, stop, description);
@@ -81,9 +81,7 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
             result = convertView;
 
             convertView.setTag(holder);
-            if (id == 1) {
-                convertView.setBackgroundColor(Color.GREEN);
-            }
+
 
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -95,9 +93,22 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         result.startAnimation(animation);
         lastPosition = position;
 
-        holder.id.setText(String.format(Locale.ENGLISH,"%d",alarm.getId()));
+        holder.id.setText(String.format(Locale.ENGLISH, "%d", alarm.getId()));
         holder.description.setText(alarm.getDescription());
-        holder.countdown.setText(String.format(Locale.ENGLISH,"%d",(alarm.getStop() - alarm.getStart())));
+        //   holder.countdown.setText(String.format(Locale.ENGLISH,"%d",(alarm.getStop() - alarm.getStart())));
+
+        long lStop = alarm.getStop();
+        long lNow = System.currentTimeMillis();
+        long lCountdown = lStop - lNow;
+        int countdown = (int) lCountdown / 1000;
+
+
+        holder.countdown.setText(String.format(Locale.ENGLISH, "%d", countdown));
+
+        if(countdown<0)
+            convertView.setBackgroundColor(Color.RED);
+        else          convertView.setBackgroundColor(Color.GREEN);
+
         return convertView;
     }
 }

@@ -4,23 +4,23 @@ package com.example.scatterbrain;
  */
 
 public class Alarm {
-    private int id;
+    private long id;
     private long start;
     private long stop;
     private String description;
 
-    public Alarm(int id, long start,long stop,  String description) {
+    public Alarm(long id, long start,long stop,  String description) {
         this.id = id;
         this.start = start;
         this.stop = stop;
         this.description = description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
