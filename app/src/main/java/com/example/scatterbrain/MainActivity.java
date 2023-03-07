@@ -4,6 +4,7 @@ package com.example.scatterbrain;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -35,12 +36,16 @@ public class MainActivity extends AppCompatActivity {
     Timer timer;
     TimerTask timerTask;
 
+
+    //  static public boolean bStopMediaPlayer = false;
     //
     // see https://guides.codepath.com/android/Populating-a-ListView-with-a-CursorAdapter
     //
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
         ListView mListView = findViewById(R.id.alarmList);
@@ -68,18 +73,28 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (thisAlarm == null) {
-                 Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
             } else {
                 v.setText(thisAlarm.getDescription());
             }
 
 
-
-
         });
 
 
-        Alarm s = new Alarm(System.currentTimeMillis(), 0, 0, "Free Sheba");
+        Alarm s = new Alarm(1, 0, 0, "Free Sheba");
+        alarmList.add(s);
+
+
+        s = new Alarm(2, 0, 0, "Check air frier");
+        alarmList.add(s);
+
+
+        s = new Alarm(3, 0, 0, "Turn off boiler");
+        alarmList.add(s);
+
+
+        s = new Alarm(4, 0, 0, "Kettle");
         alarmList.add(s);
 
         startTimer();
@@ -88,12 +103,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void actionButton(View v) {
         String viewID = getResources().getResourceName(v.getId());
-        int l = viewID.length();
-        viewID = viewID.substring(l - 1, l);
-        String thisKey = viewID;
 
+        String[] explode = viewID.split("_");
 
-
+        String thisKey = explode[1];
         switch (thisKey) {
             case "s": {
                 TextView vDesc = (TextView) findViewById(R.id.description);
@@ -102,15 +115,31 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(this, "Null alarm", Toast.LENGTH_SHORT).show();
                 }
-                ;
                 break;
             }
 
             case "n": {
                 int now = (int) System.currentTimeMillis();
-                Alarm s = new Alarm(now, now, now+1000*10, "New alarm 10 seconds");
+                Alarm s = new Alarm(now, now, now + 1000 * 10, "New alarm 10 seconds");
                 alarmList.add(s);
                 break;
+            }
+            case "h": {
+                //      bStopMediaPlayer = true;
+                break;
+            }
+            case "5":
+            case "10":
+            case "30":
+            case "60": {
+                int key_mins = Integer.parseInt(thisKey);
+                int now = (int) System.currentTimeMillis();
+                //          Alarm s = new Alarm(now, now, now + 1000 * 60 * key_mins, String.format("New alarm %d mins", key_mins));
+                thisAlarm.setStart(now + 1000 * key_mins);
+                refreshDataset();
+                //   alarmList.add(s);
+                break;
+
             }
         }
 
@@ -125,13 +154,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void refreshDataset() {
-        //   helper.readAll(this, alarmList);
+        // Need to sort the list lowest at the top
+        int c = alarmList.size();
+        for (int s = 0; s < c - 2; s++) {
+            for (int i = s; i < c - 1; i++) {
+                Alarm tempAlarm = alarmList.get(i);
+                Alarm tempAlarm2 = alarmList.get(i + 1);
+                if (tempAlarm2.getStart() < tempAlarm.getStart()) {
+                    alarmList.set(i, tempAlarm2);
+                    alarmList.set(i + 1, tempAlarm);
+                }
+            }
+        }
         adapter.notifyDataSetChanged();
     }
-
-
-
-
 
 
     @Override
@@ -153,12 +189,12 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(timerTask, 5000, 10000); //
     }
 
-    public void stoptimertask( ) {
+    public static void stoptimertask() {
         //stop the timer, if it's not already null
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
+        // if (timer != null) {
+        //    timer.cancel();
+        //    timer = null;
+        // }
     }
 
     public void initializeTimerTask() {
@@ -169,21 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 //use a handler to run a toast that shows the current timestamp
                 handler.post(new Runnable() {
                     public void run() {
-                        //get the current timeStamp
-                        /*
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MMMM:yyyy HH:mm:ss a");
-                        final String strDate = simpleDateFormat.format(calendar.getTime());
-
-                        //show the toast
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(getApplicationContext(), strDate, duration);
-                        toast.show();
-
-                         */
-
                         refreshDataset();
-
                     }
                 });
             }
@@ -191,16 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

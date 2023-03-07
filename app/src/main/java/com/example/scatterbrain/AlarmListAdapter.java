@@ -3,6 +3,7 @@ package com.example.scatterbrain;
 import android.content.Context;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import java.util.Locale;
 
 /**
  * Created by User on 3/14/2017.
+ * <p>
+ * Will need to use this to bring activity to front
+ * https://stackoverflow.com/questions/20306350/android-background-activity-bring-itself-to-foreground
  */
 
 public class AlarmListAdapter extends ArrayAdapter<Alarm> {
@@ -26,6 +30,9 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
     private final Context mContext;
     private final int mResource;
     private int lastPosition = -1;
+
+
+    static MediaPlayer mp;
 
     /**
      * Holds variables in a View
@@ -38,6 +45,8 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         TextView description;
 
         TextView countdown;
+
+
     }
 
     /**
@@ -58,7 +67,6 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         long stop = getItem(position).getStop();
 
         String description = getItem(position).getDescription();
-        //   long countdown = stop - start;
 
         //Create the alarm object with the information
         Alarm alarm = new Alarm(id, start, stop, description);
@@ -81,8 +89,6 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
             result = convertView;
 
             convertView.setTag(holder);
-
-
         } else {
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
@@ -97,22 +103,38 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         holder.description.setText(alarm.getDescription());
         //   holder.countdown.setText(String.format(Locale.ENGLISH,"%d",(alarm.getStop() - alarm.getStart())));
 
-        long lStop = alarm.getStop();
+   //     long lStop = alarm.getStop();
         long lNow = System.currentTimeMillis();
-        long lCountdown = lStop - lNow;
+        long lCountdown = alarm.getStart() - lNow;
         int countdown = (int) lCountdown / 1000;
 
 
         holder.countdown.setText(String.format(Locale.ENGLISH, "%d", countdown));
 
-        if(countdown<0)
-            convertView.setBackgroundColor(Color.RED);
-        else          convertView.setBackgroundColor(Color.GREEN);
-
+        if (alarm.getStart() == 0)
+            convertView.setBackgroundColor(Color.LTGRAY);
+        else {
+            if (countdown < 0) {
+                convertView.setBackgroundColor(Color.RED);
+/*
+                if (mp == null) {
+                    mp = MediaPlayer.create(mContext, R.raw.blockbuster);
+                }
+                if (mp.isPlaying()) {
+                    mp.stop();
+                    mp.release();
+                    mp = null;
+                } else {
+                    if (MainActivity.bStopMediaPlayer)
+                        mp.stop();
+                    else
+                        mp.start();
+                }*/
+            } else convertView.setBackgroundColor(Color.GREEN);
+        }
         return convertView;
     }
 }
-
 
 
 
