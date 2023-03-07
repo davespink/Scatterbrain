@@ -9,10 +9,10 @@ public class Alarm {
     private long stop;
     private String description;
 
-    public Alarm(long id, long start,long stop,  String description) {
+    public Alarm(long id, long start,  String description) {
         this.id = id;
         this.start = start;
-        this.stop = stop;
+       // this.stop = stop;
         this.description = description;
     }
 
@@ -32,17 +32,17 @@ public class Alarm {
         this.start = start;
     }
 
-    public long getStop() {
-        return stop;
-    }
+  //  public long getStop() {
+  //      return stop;
+   // }
 
-    public void setStop(long stop) {
-        this.stop = stop;
-    }
+ //   public void setStop(long stop) {
+ //       this.stop = stop;
+  //  }
 
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {

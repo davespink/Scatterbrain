@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -82,19 +83,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Alarm s = new Alarm(1, 0, 0, "Free Sheba");
+        Alarm s = new Alarm(1, Long.MAX_VALUE, "Free Sheba");
         alarmList.add(s);
 
 
-        s = new Alarm(2, 0, 0, "Check air frier");
+        s = new Alarm(2, Long.MAX_VALUE, "Check air frier");
         alarmList.add(s);
 
 
-        s = new Alarm(3, 0, 0, "Turn off boiler");
+        s = new Alarm(3, Long.MAX_VALUE, "Turn off boiler");
         alarmList.add(s);
 
 
-        s = new Alarm(4, 0, 0, "Kettle");
+        s = new Alarm(4, Long.MAX_VALUE, "Kettle");
         alarmList.add(s);
 
         startTimer();
@@ -120,12 +121,14 @@ public class MainActivity extends AppCompatActivity {
 
             case "n": {
                 int now = (int) System.currentTimeMillis();
-                Alarm s = new Alarm(now, now, now + 1000 * 10, "New alarm 10 seconds");
+                long when = now + 1000 * 60 * 60 * 24;
+                Alarm s = new Alarm(now,Long.MAX_VALUE,String.format(Locale.ENGLISH,"New alarm"));
                 alarmList.add(s);
                 break;
             }
             case "h": {
                 //      bStopMediaPlayer = true;
+                thisAlarm.setStart(Long.MAX_VALUE);
                 break;
             }
             case "5":
@@ -186,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         initializeTimerTask();
 
         //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-        timer.schedule(timerTask, 5000, 10000); //
+        timer.schedule(timerTask, 5, 10000); //
     }
 
     public static void stoptimertask() {
@@ -202,11 +205,8 @@ public class MainActivity extends AppCompatActivity {
         timerTask = new TimerTask() {
             public void run() {
 
-                //use a handler to run a toast that shows the current timestamp
-                handler.post(new Runnable() {
-                    public void run() {
+                handler.post(()-> {
                         refreshDataset();
-                    }
                 });
             }
         };

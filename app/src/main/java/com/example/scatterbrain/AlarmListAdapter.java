@@ -64,12 +64,12 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         //get the alarm information
         long id = getItem(position).getId();
         long start = getItem(position).getStart();
-        long stop = getItem(position).getStop();
+        //    long stop = getItem(position).getStop();
 
         String description = getItem(position).getDescription();
 
         //Create the alarm object with the information
-        Alarm alarm = new Alarm(id, start, stop, description);
+        Alarm alarm = new Alarm(id, start, description);
 
         //create the view result for showing the animation
         final View result;
@@ -103,7 +103,7 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
         holder.description.setText(alarm.getDescription());
         //   holder.countdown.setText(String.format(Locale.ENGLISH,"%d",(alarm.getStop() - alarm.getStart())));
 
-   //     long lStop = alarm.getStop();
+        //     long lStop = alarm.getStop();
         long lNow = System.currentTimeMillis();
         long lCountdown = alarm.getStart() - lNow;
         int countdown = (int) lCountdown / 1000;
@@ -111,9 +111,10 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
         holder.countdown.setText(String.format(Locale.ENGLISH, "%d", countdown));
 
-        if (alarm.getStart() == 0)
+        if (alarm.getStart() == Long.MAX_VALUE) {
             convertView.setBackgroundColor(Color.LTGRAY);
-        else {
+            holder.countdown.setText("*");
+        } else {
             if (countdown < 0) {
                 convertView.setBackgroundColor(Color.RED);
 /*

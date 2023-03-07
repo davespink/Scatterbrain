@@ -14,7 +14,7 @@
     <string name="_60">60</string>
     <string name="hello_i_am_a_textview">Hello, I am a TextView</string>
     <string name="save">Save</string>
-    <string name="newAlarm">+</string>
+    <string name="newAlarm">NEW</string>
     <string name="halt">STOP</string>
 
 </resources>
